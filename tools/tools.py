@@ -66,3 +66,39 @@ def save_text_to_file(string, target_path, filename='recipe.txt'):
     except Exception as e:
         print(f'Ошибка при сохранении текста в файл: {e}')
 
+
+def save_list_to_file(my_list, filename='new_urls_list.txt'):
+    try:
+        with open(filename, 'w', encoding='utf-8') as file:
+            for item in my_list:
+                file.write(f"{item}\n")
+        print(f"Список успешно сохранён в файл {filename}.")
+    except Exception as e:
+        print(f"Произошла ошибка при сохранении списка: {e}")
+
+
+def get_new_url():
+    try:
+        with open('new_urls_list.txt', 'r') as file:
+            urls = file.readlines()
+
+        if not urls:
+            print("Файл new_urls_list.txt пуст или все URL уже обработаны.")
+            return
+        
+        first_url = urls.pop(0).strip()
+
+
+        with open('posted_urls_list.txt', 'a') as file:
+            file.write(first_url + '\n')
+
+        with open('new_urls_list.txt', 'w') as file:
+            file.writelines(urls)
+
+        print(f"URL '{first_url}' был перемещён в файл posted_urls_list.txt.")
+        return first_url
+
+    except FileNotFoundError:
+        print("Один из файлов не найден.")
+        return None
+

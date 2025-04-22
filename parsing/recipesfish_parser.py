@@ -32,17 +32,15 @@ def get_all_recipes(main_url):
         for page in range(1, page_number + 1):
             page_url = f'{main_url}page/{page}/'
             response = requests.get(page_url)
-            if response.status_code == 200:
-                soup = BeautifulSoup(response.text, 'lxml')
-                recipes = soup.find_all('h2', class_='entry-title')
-                for recipe in recipes:
-                    urls_list.append(recipe.find('a')['href'])
-
-        for url in urls_list:
-            print(url)
+            soup = BeautifulSoup(response.text, 'lxml')
+            recipes = soup.find_all('h2', class_='entry-title')
+            for recipe in recipes:
+                urls_list.append(recipe.find('a')['href'])
+        return urls_list
     else:
         print(f'Requests error in get_all_recipes: {response.status_code}')
         return None
+
 
 def get_recipe(url):
     response = requests.get(url)

@@ -1,10 +1,11 @@
 from gpt.deepseek import get_translation
 from parsing.recipesfish_parser import get_recipe, get_all_recipes
-from tools.tools import download_images, remove_images, clear_text, save_text_to_file, create_recipe_folder
+from tools.tools import (download_images, remove_images, clear_text, save_text_to_file, 
+                         save_list_to_file, get_new_url, create_recipe_folder)
 
-url = 'https://recipesfish.com/honey-garlic-salmon-bites/'
-url = 'https://recipesfish.com/baked-salmon-with-lemon-butter-cream-sauce/'
-url = 'https://recipesfish.com/baked-salmon-with-asparagus-lemon-garlic-sauce-recipe/'
+# url = 'https://recipesfish.com/honey-garlic-salmon-bites/'
+# url = 'https://recipesfish.com/baked-salmon-with-lemon-butter-cream-sauce/'
+# url = 'https://recipesfish.com/baked-salmon-with-asparagus-lemon-garlic-sauce-recipe/'
 
 all_recipes_url = 'https://recipesfish.com/category/recipes/seafood/'
 
@@ -12,9 +13,10 @@ outro_text = 'Понравился рецепт? Поддержите канал
 
 
 def main():
-    get_all_recipes(all_recipes_url)
-    return
-
+    # urls_list = get_all_recipes(all_recipes_url)
+    # save_list_to_file(urls_list)
+    url = get_new_url()
+    print(url)
     recipe_path = url.split('/')[3]
     target_path = f'/Users/alexanderbeley/Documents/Dzen/Recipes/Recipesfish/{recipe_path}/'
     create_recipe_folder(target_path)
