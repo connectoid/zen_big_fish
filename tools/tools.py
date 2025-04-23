@@ -49,8 +49,9 @@ def download_images(image_urls, target_path, output_folder='images'):
                     for chunk in response.iter_content(chunk_size=8192):
                         file.write(chunk)
                 print(f'Файл {filename} успешно загружен.')
-                convert_webp_to_jpeg(filename)
-                os.remove(filename)
+                if filename.split('.')[-1] == 'webp':
+                    convert_webp_to_jpeg(filename)
+                    os.remove(filename)
             else:
                 print(f'Ошибка при загрузке файла {url}. Код статуса: {response.status_code}')
         except Exception as e:

@@ -7,7 +7,7 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 
 
-from parsing.saveur_parser import get_recipe
+from parsing.recipesfish_parser import get_recipe
 from tools.tools import clear_text, get_new_url
 from gpt.deepseek import get_translation
 
